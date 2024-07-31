@@ -7,22 +7,27 @@ import { experiences } from "../data/experience"
 
 export const Experience = () => {
     return <Grid container alignItems="center" justifyContent="start" direction="column" sx={{ml: 1}}>
-        <Grid item><Typography variant="h4" component="h2">Experience</Typography></Grid>
+        <Grid item><Typography variant="h2">Experience</Typography></Grid>
             {
                 experiences.map((experience, index) => 
                     <Grid container key={index} direction="column">
-                        <Grid container xs={12} direction="row" sx={{justifyContent: {xs: "center", lg: "start"}}}>
-                            <Typography fontWeight="bold" sx={{textDecoration: "underline"}}>{experience.title}</Typography>
-                            <Typography fontWeight="bold" sx={{textDecoration: "unset", mx: 1}}>@</Typography>
-                            <Typography fontWeight="bold" sx={{textDecoration: "underline"}}>{experience.company}</Typography>
-                        </Grid>
+                        <Typography variant="h5" fontWeight="bold" textAlign="left">{experience.company} | {experience.duration}</Typography>
                         <Grid container justifyContent="space-around">
                             <List>
                                 {
-                                    experience.points.map((point, pointIndex) => 
-                                        <Stack key={pointIndex} direction="row" alignItems="center">
-                                            <CircleIcon sx={{fontSize: "5px"}}/>
-                                            <ListItemText sx={{textAlign: "left", ml: 1}} key={pointIndex} primary={point} />
+                                    experience.positions.map((position, posIndex) => 
+                                        <Stack key={posIndex}>
+                                            <Stack direction="row">
+                                                <Typography textAlign="left" fontStyle="italic" fontWeight="bold" sx={{mr: 1}}>{position.title} {position.team ? `@ ${position.team}` : ""}</Typography>                                                    
+                                            </Stack>
+                                            {
+                                                position.points.map((point, pointIndex) =>
+                                                    <Stack key={pointIndex} direction="row" alignItems="center">
+                                                        <CircleIcon sx={{fontSize: "5px"}}/>
+                                                        <ListItemText sx={{textAlign: "left", ml: 1}} key={pointIndex} primary={point} />
+                                                    </Stack>
+                                                )
+                                            }
                                         </Stack>
                                         )
                                 }
